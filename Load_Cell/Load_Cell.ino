@@ -1,5 +1,9 @@
 /*
- * Load Cell Instrument – firmware for HX711 load cell (Arduino/ESP32).
+ * Load Cell Instrument – firmware for HX711 load cell.
+ *
+ * Compatible with Arduino and Arduino-compatible boards (AVR, SAM, ESP32, etc.)
+ * that support the HX711 library. Set HX_DOUT and HX_SCK to the pins used by
+ * your HX711 (data and clock); pin numbers depend on your board.
  *
  * Behaviour:
  *   - At startup: average 50 samples with no load → zero_offset.
@@ -9,12 +13,10 @@
  *
  * Serial output: one line per reading, "time_ms\tTHRUST_g" (e.g. "1300\t152.3").
  * The desktop UI reads the last token as grams.
- *
- * Hardware: HX711 DOUT → pin HX_DOUT, SCK → pin HX_SCK. Adjust for your board.
  */
 #include "HX711.h"
 
-/* HX711 data and clock pins (typical for ESP32; change for Arduino/other). */
+/* HX711 data (DOUT) and clock (SCK) pins – change to match your board and wiring. */
 #define HX_DOUT 36
 #define HX_SCK  38
 

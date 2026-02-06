@@ -1,8 +1,10 @@
 # Load Cell Instrument
 
-Desktop UI for real-time thrust/weight display from an HX711 load cell over USB serial (Arduino Mega 2560, ESP32, etc.). Designed as an instrument-style display: large readout, live/pause, tare, unit switch (g / kg / N), and exportable history (CSV).
+Desktop UI for real-time thrust/weight display from an HX711 load cell over USB serial. Designed as an instrument-style display: large readout, live/pause, tare, unit switch (g / kg / N), and exportable history (CSV).
 
-**Prerequisites:** Python 3.10 or newer (3.9 works; 3.10+ recommended), and a board with HX711 connected and firmware flashed (see below).
+**Prerequisites:** Python 3.10 or newer (3.9 works; 3.10+ recommended), and a compatible board with HX711 connected and firmware flashed (see below).
+
+**Board compatibility:** The UI works with **any device that exposes a USB serial port** and sends one numeric value per line (grams). The included firmware (`Load_Cell/Load_Cell.ino`) targets **Arduino-compatible boards** (e.g. AVR, SAM, or ESP32) that support the HX711 library. Pin numbers in the sketch depend on your board—adjust `HX_DOUT` and `HX_SCK` in the `.ino` file to match your wiring. Other MCUs (e.g. Raspberry Pi Pico, STM32) can be used if you implement the same serial protocol (e.g. `time_ms\tTHRUST_g` with the last token as grams).
 
 ---
 
@@ -53,13 +55,14 @@ Select the serial port in the UI, click **Connect**, then use **Power ON** for l
 
 ### 4. Flashing the firmware (only when needed)
 
-Firmware lives in `Load_Cell/Load_Cell.ino`. Flash the board **only when you change that file** (e.g. calibration, pin numbers, or deadband).
+Firmware lives in `Load_Cell/Load_Cell.ino`. It is written for **Arduino-compatible boards** (AVR, SAM, ESP32, etc.) that support the HX711 library. Flash **only when you change that file** (e.g. calibration, pin numbers, or deadband).
 
-1. Open `Load_Cell/Load_Cell.ino` in the Arduino IDE (or PlatformIO).
-2. Install the **HX711** library if required.
-3. Select your board and port, then upload.
+1. Open `Load_Cell/Load_Cell.ino` in the Arduino IDE or PlatformIO.
+2. Set `HX_DOUT` and `HX_SCK` to the pins where your HX711 is connected (see comments in the file).
+3. Install the **HX711** library if required.
+4. Select your board and port, then upload.
 
-After power-up, the MCU takes a few seconds to establish zero (no load). Then it streams `time_ms\tTHRUST_g` lines. The UI expects one numeric value per line (the last token is used as grams).
+After power-up, the board takes a few seconds to establish zero (no load). Then it streams lines in the form `time_ms\tTHRUST_g`. The UI expects one numeric value per line (the last token is used as grams).
 
 ---
 
