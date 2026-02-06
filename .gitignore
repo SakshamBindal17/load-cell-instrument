@@ -1,0 +1,34 @@
+# Virtual environment (create with: python -m venv .venv)
+.venv/
+venv/
+env/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+*.egg-info/
+*.egg
+
+# Exported CSV files (saved in results/ by the app)
+results/
+
+# IDE and editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Optional: Arduino/PlatformIO build outputs (uncomment if you use them)
+# Load_Cell/build/

@@ -1,0 +1,8 @@
+# Load Cell Instrument – Python dependencies
+# Install with: pip install -r requirements.txt (inside a venv)
+
+# Qt 6 bindings for the desktop UI (main window, buttons, display, serial)
+PySide6>=6.7.0
+
+# Serial port access and port enumeration (used by SerialReader and port dropdown)
+pyserial>=3.5
